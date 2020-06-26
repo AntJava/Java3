@@ -44,10 +44,11 @@ public class Car implements Runnable {
                 System.out.println(this.name + " WIN");
                 win.countDown();
             }
-            lock.unlock();
             cb.await();
         } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
     }
 }
